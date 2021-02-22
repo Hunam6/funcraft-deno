@@ -1,2 +1,2 @@
-# funcraft-deno
-A funcraft scraper written in Deno
+# funcraft-deno (WIP)
+A funcraft statistics scraper for Deno
