@@ -3,8 +3,10 @@ import {parse} from 'https://deno.land/x/date_fns/index.js'
 import {fr} from 'https://deno.land/x/date_fns/locale/index.js'
 import {Game} from './game.ts'
 
-export async function fetchPlayer(username: string, period: number) { //TODO: error handling //TODO: fetch friends
+export async function fetchPlayer(username: string, period: number) {
+  //TODO: fetch friends
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/joueurs?q=${username}`).then(res => res.text()), 'text/html')!
+  if (doc.getElementsByClassName('alert-container').length !== 0) return new Error('Player not found')
   class Player {
     avatar: string
     grade: string
@@ -13,16 +15,16 @@ export async function fetchPlayer(username: string, period: number) { //TODO: er
     banned = false
     gloryCount: number
     totalGameCount: number
-    rush: object //TODO: make an interface for this
-    landrush: object
-    hikabrain: object
-    skywars: object
+    rushMDT: object //TODO: fix this type warn
+    hikaBrain: object
+    skyWars: object
     octogone: object
-    shotcraft: object
+    shootCraft: object
     infecte: object
     survival: object
     blitz: object
     PVPSmash: object
+    landRush: object
 
     constructor(period: number) {
       this.avatar = doc.getElementsByClassName('head')[0].children[0].attributes.src
@@ -35,16 +37,16 @@ export async function fetchPlayer(username: string, period: number) { //TODO: er
       if (doc.getElementsByClassName('player-alert')[0]) this.banned = true
       this.gloryCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[0].textContent.replace(/\s+/g, '').slice(0, -17))
       this.totalGameCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[1].textContent.slice(0, -14))
-      this.rush = new Game(doc, 0, period)
-      this.landrush = new Game(doc, 1, period)
-      this.hikabrain = new Game(doc, 2, period)
-      this.skywars = new Game(doc, 3, period)
-      this.octogone = new Game(doc, 4, period)
-      this.shotcraft = new Game(doc, 5, period)
-      this.infecte = new Game(doc, 6, period)
-      this.survival = new Game(doc, 7, period)
-      this.blitz = new Game(doc, 8, period)
-      this.PVPSmash = new Game(doc, 9, period)
+      this.rushMDT = new Game(doc, 0, period)
+      this.hikaBrain = new Game(doc, 1, period)
+      this.skyWars = new Game(doc, 2, period)
+      this.octogone = new Game(doc, 3, period)
+      this.shootCraft = new Game(doc, 4, period)
+      this.infecte = new Game(doc, 5, period)
+      this.survival = new Game(doc, 6, period)
+      this.blitz = new Game(doc, 7, period)
+      this.PVPSmash = new Game(doc, 8, period)
+      this.landRush = new Game(doc, 9, period)
     }
   }
 

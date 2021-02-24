@@ -8,13 +8,15 @@ export class Game {
   kills: number
   deaths: number
   special = 0
-  constructor(doc: any, game: number, period: number) { //TODO: games ratios
+  constructor(doc: any, game: number, period: number) {
+    //TODO: games ratios
+    //TODO: games colors
     const selector = doc.getElementsByClassName('player-stats-info')[game].children
     let top1 = 0
     let plus = ''
     let always = 1
     if (period > 0) {
-      plus = `.children[${period-1}]`
+      plus = `.children[${period - 1}]`
       always = 2
     }
     if (selector[4].children[0].textContent === ' TOP 1  ' || (selector[4].children[0].textContent === ' Victoires  ' && selector.length === 8)) top1 = 1
