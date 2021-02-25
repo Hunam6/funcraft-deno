@@ -7,6 +7,16 @@ export async function fetchPlayer(username: string, period: number) {
   //TODO: fetch friends
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/joueurs?q=${username}`).then(res => res.text()), 'text/html')!
   if (doc.getElementsByClassName('alert-container').length !== 0) return new Error('Player not found')
+  const friend = new DOMParser().parseFromString(await fetch(doc.getElementById('player-friends-content')!.getAttribute('data-url')!).then(res => res.text()), 'text/html')!
+  const friends: any[] = []
+  const selector = friend.getElementsByClassName('players-heads')[0].children
+  for (let i = 0; i < selector.length; i++) {
+    friends.push({
+      nickname: selector[i].getAttribute('title'),
+      avatar: selector[i].children[0].children[0].getAttribute('src'),
+      funcraftURL: selector[i].children[0].getAttribute('href')
+    })
+  }
   class Player {
     avatar: string
     grade: string
@@ -15,6 +25,7 @@ export async function fetchPlayer(username: string, period: number) {
     banned = false
     gloryCount: number
     totalGameCount: number
+    friends: Array<Record<string, string>>
     rushMDT: object //TODO: fix this type warn
     hikaBrain: object
     skyWars: object
@@ -37,6 +48,7 @@ export async function fetchPlayer(username: string, period: number) {
       if (doc.getElementsByClassName('player-alert')[0]) this.banned = true
       this.gloryCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[0].textContent.replace(/\s+/g, '').slice(0, -17))
       this.totalGameCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[1].textContent.slice(0, -14))
+      this.friends = friends
       this.rushMDT = new Game(doc, 0, period)
       this.hikaBrain = new Game(doc, 1, period)
       this.skyWars = new Game(doc, 2, period)
