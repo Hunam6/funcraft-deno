@@ -3,12 +3,11 @@ import {parse} from 'https://deno.land/x/date_fns/index.js'
 import {fr} from 'https://deno.land/x/date_fns/locale/index.js'
 import {Game} from './game.ts'
 
-export async function fetchPlayer(username: string, period: number) {
+export async function fetchPlayer(username: string, period = 0) {
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/joueurs?q=${username}`).then(res => res.text()), 'text/html')!
   if (doc.getElementsByClassName('alert-container').length !== 0) return new Error('Player not found')
-  const friend = new DOMParser().parseFromString(await fetch(doc.getElementById('player-friends-content')!.getAttribute('data-url')!).then(res => res.text()), 'text/html')!
+  const selector = new DOMParser().parseFromString(await fetch(doc.getElementById('player-friends-content')!.getAttribute('data-url')!).then(res => res.text()), 'text/html')!.getElementsByClassName('players-heads')[0].children
   const friends: Array<Record<string, string>> = []
-  const selector = friend.getElementsByClassName('players-heads')[0].children
   for (let i = 0; i < selector.length; i++) {
     friends.push({
       nickname: selector[i].getAttribute('title')!,
@@ -30,7 +29,7 @@ export async function fetchPlayer(username: string, period: number) {
     skyWars: Game
     octogone: Game
     shootCraft: Game
-    infecte: Game
+    infected: Game
     survival: Game
     blitz: Game
     PVPSmash: Game
@@ -53,7 +52,7 @@ export async function fetchPlayer(username: string, period: number) {
       this.skyWars = new Game(doc, 2, period)
       this.octogone = new Game(doc, 3, period)
       this.shootCraft = new Game(doc, 4, period)
-      this.infecte = new Game(doc, 5, period)
+      this.infected = new Game(doc, 5, period)
       this.survival = new Game(doc, 6, period)
       this.blitz = new Game(doc, 7, period)
       this.PVPSmash = new Game(doc, 8, period)

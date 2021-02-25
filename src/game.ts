@@ -1,3 +1,5 @@
+import {Document} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts'
+
 export class Game {
   rank: number
   points: number
@@ -9,7 +11,7 @@ export class Game {
   deaths: number
   special = 0
   color: string
-  constructor(doc: any, game: number, period: number) {
+  constructor(doc: Document, game: number, period: number) {
     //TODO: games ratios
     const selector = doc.getElementsByClassName('player-stats-info')[game].children
     let top1 = 0
