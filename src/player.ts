@@ -4,17 +4,16 @@ import {fr} from 'https://deno.land/x/date_fns/locale/index.js'
 import {Game} from './game.ts'
 
 export async function fetchPlayer(username: string, period: number) {
-  //TODO: fetch friends
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/joueurs?q=${username}`).then(res => res.text()), 'text/html')!
   if (doc.getElementsByClassName('alert-container').length !== 0) return new Error('Player not found')
   const friend = new DOMParser().parseFromString(await fetch(doc.getElementById('player-friends-content')!.getAttribute('data-url')!).then(res => res.text()), 'text/html')!
-  const friends: any[] = []
+  const friends: Array<Record<string, string>> = []
   const selector = friend.getElementsByClassName('players-heads')[0].children
   for (let i = 0; i < selector.length; i++) {
     friends.push({
-      nickname: selector[i].getAttribute('title'),
-      avatar: selector[i].children[0].children[0].getAttribute('src'),
-      funcraftURL: selector[i].children[0].getAttribute('href')
+      nickname: selector[i].getAttribute('title')!,
+      avatar: selector[i].children[0].children[0].getAttribute('src')!,
+      funcraftURL: selector[i].children[0].getAttribute('href')!
     })
   }
   class Player {
