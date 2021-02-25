@@ -26,16 +26,16 @@ export async function fetchPlayer(username: string, period: number) {
     gloryCount: number
     totalGameCount: number
     friends: Array<Record<string, string>>
-    rushMDT: object //TODO: fix this type warn
-    hikaBrain: object
-    skyWars: object
-    octogone: object
-    shootCraft: object
-    infecte: object
-    survival: object
-    blitz: object
-    PVPSmash: object
-    landRush: object
+    rushMDT: Game
+    hikaBrain: Game
+    skyWars: Game
+    octogone: Game
+    shootCraft: Game
+    infecte: Game
+    survival: Game
+    blitz: Game
+    PVPSmash: Game
+    landRush: Game
 
     constructor(period: number) {
       this.avatar = doc.getElementsByClassName('head')[0].children[0].attributes.src
