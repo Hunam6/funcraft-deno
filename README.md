@@ -248,7 +248,7 @@ fetchLeaderboard(game: string, period: number | string)
 fetchServerInfo()
 ```
 
-**↳** return server's stats
+**↳** return server's stats & infos
 
 ### Credits
 

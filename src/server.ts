@@ -8,7 +8,7 @@ export async function fetchServerInfo() {
     registeredPlayers: number
     connectedPlayers: number
     oldServer: Record<string, number>
-    //TODO: staff: Staff
+    staff = new Staff(doc)
     constructor() {
       this.connectedPlayersRecord = parseInt(doc.querySelectorAll('.gstat-item')[0].children[0].textContent.replace(/ /g, ''))
       this.registeredPlayers = parseInt(doc.querySelectorAll('.gstat-item')[1].children[0].textContent.replace(/ /g, ''))
