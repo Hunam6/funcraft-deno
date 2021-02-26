@@ -2,13 +2,13 @@ import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts'
 import {format, sub} from 'https://deno.land/x/date_fns/index.js'
 
 export async function fetchLeaderboard(game: string, period: number | string = 0) {
-  //TODO: error handling
   if (typeof period !== 'string')
     if (period !== 0) period = format(sub(new Date(), {months: period}), 'yyyy-MM', {})
     else period = 'always'
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/classement/${game}/${period}?sendData=1`).then(res => res.text()), 'text/html')!
   const lb = []
   let top1 = 0
+  if (doc.querySelector('thead') === null) return Error('Invalid game or period out of range or invalid')
   if (doc.querySelector('thead')!.children[0].children[4].textContent === 'TOP 1' || game === 'infected') top1 = 1
   for (let i = 0; i < doc.querySelector('tbody')!.children.length; i++) {
     lb.push({
