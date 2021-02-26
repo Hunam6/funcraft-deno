@@ -15,7 +15,7 @@ fetchPlayer('_Hunam').then(player => console.log(player))
 
 <details><summary>Output</summary>
 
-  ```json
+  ```typescript
   Player {
   banned: 0,
   avatar: "https://d31zb6ev5hmn3f.cloudfront.net/_u/avatar/head/_Hunam/m2/a80ac36827ac5d1ee9628574a7c9ec86bf3b92d8",
