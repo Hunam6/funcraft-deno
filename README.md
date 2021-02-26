@@ -9,7 +9,7 @@
 #### Example
 
 ```typescript
-import {fetchPlayer} from 'https://deno.land/x/funcraft@1.0.1/mod.ts'
+import {fetchPlayer} from 'https://deno.land/x/funcraft@1.1.0/mod.ts'
 fetchPlayer('_Hunam').then(player => console.log(player))
 ```
 
