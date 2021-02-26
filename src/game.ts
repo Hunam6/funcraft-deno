@@ -12,7 +12,7 @@ export class Game {
   special = 0
   color: string
   constructor(doc: Document, game: number, period: number) {
-    //TODO: games ratios
+    //TODO: games ratios (I'm pretty sure we'll have to wait for https://github.com/b-fuze/deno-dom/issues/35)
     const selector = doc.getElementsByClassName('player-stats-info')[game].children
     let top1 = 0
     let plus = ''

@@ -2,6 +2,7 @@ import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts'
 import {format, sub} from 'https://deno.land/x/date_fns/index.js'
 
 export async function fetchLeaderboard(game: string, period: number | string = 0) {
+  //TODO: error handling
   if (typeof period !== 'string')
     if (period !== 0) period = format(sub(new Date(), {months: period}), 'yyyy-MM', {})
     else period = 'always'
