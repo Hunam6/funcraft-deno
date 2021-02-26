@@ -20,7 +20,7 @@ export async function fetchPlayer(username: string, period = 0) {
     grade: string
     registeredAt: Date
     lastConnection: Date
-    banned = false
+    banned = 0
     gloryCount: number
     totalGameCount: number
     friends: Array<Record<string, string>>
@@ -43,7 +43,9 @@ export async function fetchPlayer(username: string, period = 0) {
       } else this.grade = doc.getElementsByClassName('playername')[0].children[0].textContent.trim().split(' ')[0]
       this.registeredAt = parse(doc.getElementsByClassName('tooltips')[0].attributes.title, "dd MMMM yyyy, HH'h'mm", new Date(), {locale: fr})
       this.lastConnection = parse(doc.getElementsByClassName('tooltips')[1].attributes.title, "dd MMMM yyyy, HH'h'mm", new Date(), {locale: fr})
-      if (doc.getElementsByClassName('player-alert')[0]) this.banned = true
+      if (doc.querySelector('.player-alert')! !== null)
+        if (doc.querySelector('.player-alert')!.textContent.includes('temporairement')) this.banned = 1
+        else this.banned = 2
       this.gloryCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[0].textContent.replace(/\s+/g, '').slice(0, -17))
       this.totalGameCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[1].textContent.slice(0, -14))
       this.friends = friends
@@ -59,6 +61,5 @@ export async function fetchPlayer(username: string, period = 0) {
       this.landRush = new Game(doc, 9, period)
     }
   }
-
   return new Player(period)
 }
