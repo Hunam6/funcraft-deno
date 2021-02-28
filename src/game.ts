@@ -23,15 +23,16 @@ export class Game {
     }
     const colors: Record<number, string> = {
       0: '#856400',
-      1: '#666c17',
-      2: '#09467c',
-      3: '#2c1760',
-      4: '#184953',
-      5: '#2e6218',
-      6: '#8c4701',
-      7: '#6e1a0a',
-      8: '#54351c',
-      9: '#947001'
+      1: '#947001',
+      2: '#666c17',
+      3: '#09467c',
+      4: '#2c1760',
+      5: '#184953',
+      6: '#2e6218',
+      7: '#8c4701',
+      8: '#6e1a0a',
+      9: '#54351c',
+      10: '#947001'
     }
     if (selector[4].children[0].textContent === ' TOP 1  ' || (selector[4].children[0].textContent === ' Victoires  ' && selector.length === 8)) top1 = 1
     this.rank = parseInt(new Function('selector', 'plus', 'always', 'return (selector[1].children[always]' + plus + '.textContent.trim().slice(0, -3))')(selector, plus, always)) || 0

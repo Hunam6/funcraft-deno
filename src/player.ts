@@ -24,6 +24,7 @@ export async function fetchPlayer(username: string, period = 0) {
     gloryCount: number
     totalGameCount: number
     friends: Array<Record<string, string>>
+    rushRETRO: Game
     rushMDT: Game
     hikaBrain: Game
     skyWars: Game
@@ -49,16 +50,17 @@ export async function fetchPlayer(username: string, period = 0) {
       this.gloryCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[0].textContent.replace(/\s+/g, '').slice(0, -17))
       this.totalGameCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[1].textContent.slice(0, -14))
       this.friends = friends
-      this.rushMDT = new Game(doc, 0, period)
-      this.hikaBrain = new Game(doc, 1, period)
-      this.skyWars = new Game(doc, 2, period)
-      this.octogone = new Game(doc, 3, period)
-      this.shootCraft = new Game(doc, 4, period)
-      this.infected = new Game(doc, 5, period)
-      this.survival = new Game(doc, 6, period)
-      this.blitz = new Game(doc, 7, period)
-      this.PVPSmash = new Game(doc, 8, period)
-      this.landRush = new Game(doc, 9, period)
+      this.rushRETRO = new Game(doc, 0, period)
+      this.rushMDT = new Game(doc, 1, period)
+      this.hikaBrain = new Game(doc, 2, period)
+      this.skyWars = new Game(doc, 3, period)
+      this.octogone = new Game(doc, 4, period)
+      this.shootCraft = new Game(doc, 5, period)
+      this.infected = new Game(doc, 6, period)
+      this.survival = new Game(doc, 7, period)
+      this.blitz = new Game(doc, 8, period)
+      this.PVPSmash = new Game(doc, 9, period)
+      this.landRush = new Game(doc, 10, period)
     }
   }
   return new Player(period)
