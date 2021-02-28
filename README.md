@@ -233,7 +233,9 @@ fetchPlayer(username: string, period: number)
 ```
 
 **|** `username` is the player username
+
 **|** `period`*(optional, default = `0`)* where `0` is for the stats of always and `3` stats from 3 months ago
+
 **↳** return a player's stats
 
 ```typescript
@@ -241,7 +243,9 @@ fetchLeaderboard(game: string, period: number | string)
 ```
 
 **|** `game` is the game name
+
 **|** `period`*(optional, default = `0`)* where `0` is for the stats of always and `3` stats from 3 months ago, it can also be a specific date in this format `yyyy-MM` (see [ref](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table))
+
 **↳** return a game's leaderboard
 
 ```typescript
