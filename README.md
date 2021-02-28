@@ -16,14 +16,14 @@ fetchPlayer('_Hunam').then(player => console.log(player))
 <details><summary>Output</summary>
 
   ```typescript
-  Player {
+Player {
   banned: 0,
   avatar: "https://d31zb6ev5hmn3f.cloudfront.net/_u/avatar/head/_Hunam/m2/a80ac36827ac5d1ee9628574a7c9ec86bf3b92d8",
   grade: "Mini-VIP",
   registeredAt: 2016-09-26T17:20:00.000Z,
-  lastConnection: 2021-02-26T13:23:00.000Z,
-  gloryCount: 343562,
-  totalGameCount: 5514,
+  lastConnection: 2021-02-28T18:50:00.000Z,
+  gloryCount: 344534,
+  totalGameCount: 5532,
   friends: [
     {
       nickname: "Atsumi03",
@@ -101,34 +101,46 @@ fetchPlayer('_Hunam').then(player => console.log(player))
       funcraftURL: "https://www.funcraft.net/fr/joueur/253809"
     }
   ],
+  rushRETRO: Game {
+    playTime: 0,
+    special: 0,
+    rank: 0,
+    points: 0,
+    games: 0,
+    victories: 0,
+    defeats: 0,
+    kills: 0,
+    deaths: 0,
+    color: "856400"
+  },
   rushMDT: Game {
     playTime: 341,
     special: 46,
-    rank: 53186,
+    rank: 53414,
     points: 4452,
     games: 54,
     victories: 16,
     defeats: 38,
     kills: 79,
     deaths: 178,
-    color: "856400"
+    color: "947001"
   },
   hikaBrain: Game {
-    playTime: 2100,
+    playTime: 2131,
     special: 0,
-    rank: 7208,
-    points: 74905,
-    games: 546,
-    victories: 322,
-    defeats: 224,
-    kills: 6317,
-    deaths: 8334,
+    rank: 7133,
+    points: 75575,
+    games: 557,
+    victories: 330,
+    defeats: 227,
+    kills: 6438,
+    deaths: 8477,
     color: "666c17"
   },
   skyWars: Game {
     playTime: 1290,
     special: 0,
-    rank: 14561,
+    rank: 14583,
     points: 14698,
     games: 696,
     victories: 36,
@@ -140,7 +152,7 @@ fetchPlayer('_Hunam').then(player => console.log(player))
   octogone: Game {
     playTime: 71,
     special: 1728,
-    rank: 11456,
+    rank: 11485,
     points: 2548,
     games: 32,
     victories: 1,
@@ -152,7 +164,7 @@ fetchPlayer('_Hunam').then(player => console.log(player))
   shootCraft: Game {
     playTime: 160,
     special: 0,
-    rank: 3893,
+    rank: 3895,
     points: 1954,
     games: 41,
     victories: 3,
@@ -164,7 +176,7 @@ fetchPlayer('_Hunam').then(player => console.log(player))
   infected: Game {
     playTime: 14,
     special: 0,
-    rank: 45928,
+    rank: 46215,
     points: 22,
     games: 6,
     victories: 0,
@@ -176,7 +188,7 @@ fetchPlayer('_Hunam').then(player => console.log(player))
   survival: Game {
     playTime: 59,
     special: 0,
-    rank: 11846,
+    rank: 11851,
     points: 606,
     games: 14,
     victories: 0,
@@ -186,21 +198,21 @@ fetchPlayer('_Hunam').then(player => console.log(player))
     color: "8c4701"
   },
   blitz: Game {
-    playTime: 19804,
-    special: 3435,
+    playTime: 19827,
+    special: 3443,
     rank: 38,
-    points: 426053,
-    games: 4108,
-    victories: 2369,
+    points: 427582,
+    games: 4115,
+    victories: 2376,
     defeats: 1739,
-    kills: 15334,
-    deaths: 16894,
+    kills: 15362,
+    deaths: 16905,
     color: "6e1a0a"
   },
   PVPSmash: Game {
     playTime: 14,
     special: 531,
-    rank: 27767,
+    rank: 27934,
     points: 143,
     games: 17,
     victories: 0,
