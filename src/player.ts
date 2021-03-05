@@ -5,7 +5,7 @@ import {Game} from './game.ts'
 
 export async function fetchPlayer(username: string, period = 0) {
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/joueurs?q=${username}`).then(res => res.text()), 'text/html')!
-  if (doc.getElementsByClassName('alert-container').length !== 0) return new Error('Player not found')
+  if (doc.getElementsByClassName('alert-container').length !== 0) throw new Error('Player not found')
   const selector = new DOMParser().parseFromString(await fetch(doc.getElementById('player-friends-content')!.getAttribute('data-url')!).then(res => res.text()), 'text/html')!.getElementsByClassName('players-heads')[0].children
   const friends: Array<Record<string, string>> = []
   for (let i = 0; i < selector.length; i++) {

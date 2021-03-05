@@ -8,7 +8,7 @@ export async function fetchLeaderboard(game: string, period: number | string = 0
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/classement/${game}/${period}?sendData=1`).then(res => res.text()), 'text/html')!
   const lb = []
   let top1 = 0
-  if (doc.querySelector('thead') === null) return Error('Invalid game or period out of range or invalid')
+  if (doc.querySelector('thead') === null) throw new Error('Invalid game or period out of range or invalid')
   if (doc.querySelector('thead')!.children[0].children[4].textContent === 'TOP 1' || game === 'infected') top1 = 1
   for (let i = 0; i < doc.querySelector('tbody')!.children.length; i++) {
     lb.push({
