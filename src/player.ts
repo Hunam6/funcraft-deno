@@ -22,7 +22,7 @@ export async function fetchPlayer(username: string, period = 0) {
     lastConnection: Date
     banned = 0
     gloryCount: number
-    totalGameCount: number
+    totalGames: number
     friends: Array<Record<string, string>>
     rushRETRO: Game
     rushMDT: Game
@@ -48,7 +48,7 @@ export async function fetchPlayer(username: string, period = 0) {
         if (doc.querySelector('.player-alert')!.textContent.includes('temporairement')) this.banned = 1
         else this.banned = 2
       this.gloryCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[0].textContent.replace(/\s+/g, '').slice(0, -17))
-      this.totalGameCount = parseInt(doc.getElementsByClassName('info-stats')[0].children[1].textContent.slice(0, -14))
+      this.totalGames = parseInt(doc.getElementsByClassName('info-stats')[0].children[1].textContent.slice(0, -14))
       this.friends = friends
       this.rushRETRO = new Game(doc, 0, period)
       this.rushMDT = new Game(doc, 1, period)
@@ -61,6 +61,30 @@ export async function fetchPlayer(username: string, period = 0) {
       this.blitz = new Game(doc, 8, period)
       this.PVPSmash = new Game(doc, 9, period)
       this.landRush = new Game(doc, 10, period)
+    }
+
+    get totalPoints() {
+      return this.rushRETRO.points + this.rushMDT.points + this.hikaBrain.points + this.skyWars.points + this.octogone.points + this.shootCraft.points + this.infected.points + this.survival.points + this.blitz.points + this.PVPSmash.points + this.landRush.points
+    }
+
+    get totalVictories() {
+      return this.rushRETRO.victories + this.rushMDT.victories + this.hikaBrain.victories + this.skyWars.victories + this.octogone.victories + this.shootCraft.victories + this.infected.victories + this.survival.victories + this.blitz.victories + this.PVPSmash.victories + this.landRush.victories
+    }
+
+    get totalDefeats() {
+      return this.rushRETRO.defeats + this.rushMDT.defeats + this.hikaBrain.defeats + this.skyWars.defeats + this.octogone.defeats + this.shootCraft.defeats + this.infected.defeats + this.survival.defeats + this.blitz.defeats + this.PVPSmash.defeats + this.landRush.defeats
+    }
+
+    get totalPlayTime() {
+      return this.rushRETRO.playTime + this.rushMDT.playTime + this.hikaBrain.playTime + this.skyWars.playTime + this.octogone.playTime + this.shootCraft.playTime + this.infected.playTime + this.survival.playTime + this.blitz.playTime + this.PVPSmash.playTime + this.landRush.playTime
+    }
+
+    get totalKills() {
+      return this.rushRETRO.kills + this.rushMDT.kills + this.hikaBrain.kills + this.skyWars.kills + this.octogone.kills + this.shootCraft.kills + this.infected.kills + this.survival.kills + this.blitz.kills + this.PVPSmash.kills + this.landRush.kills
+    }
+
+    get totalDeaths() {
+      return this.rushRETRO.deaths + this.rushMDT.deaths + this.hikaBrain.deaths + this.skyWars.deaths + this.octogone.deaths + this.shootCraft.deaths + this.infected.deaths + this.survival.deaths + this.blitz.deaths + this.PVPSmash.deaths + this.landRush.deaths
     }
   }
   return new Player(period)
