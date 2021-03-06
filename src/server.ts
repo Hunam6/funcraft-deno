@@ -1,9 +1,10 @@
 import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts'
 
 export async function fetchServerInfo() {
-  //TODO: super secret stats
   const doc = new DOMParser().parseFromString(await fetch('https://www.funcraft.net/fr/joueurs').then(res => res.text()), 'text/html')!
+  const secretDoc = new DOMParser().parseFromString(await fetch('https://www.funcraft.net/fr/joueur/1').then(res => res.text()), 'text/html')!
   const data = JSON.parse(doc.querySelectorAll('script')[6]!.textContent.substring(25))
+  const secretData = JSON.parse(secretDoc.querySelectorAll('script')[6]!.textContent.split('=')[3])
 
   const category = (category: number) => {
     const persons = []
@@ -16,6 +17,20 @@ export async function fetchServerInfo() {
     }
     return persons
   }
+  const formatData = (game: string) => {
+    const res: Record<string, number>[] = []
+    for (let i = 0; i < 5; i++) {
+      const obj: Record<string, number> = {}
+      if (secretData[Object.keys(secretData)[i]][game] !== undefined) {
+        for (let j = 0; j < secretData[Object.keys(secretData)[i]][game].stats.length; j++) {
+          obj[secretData[Object.keys(secretData)[i]][game].stats[j].name.replace(/(_[a-z])/gi, (l: string) => l.toUpperCase().replace('_', ''))] = secretData[Object.keys(secretData)[i]][game].stats[j].value
+        }
+      }
+      res.push(obj)
+    }
+    return res
+  }
+
   class Staff {
     admin = category(0)
     superModo = category(1)
@@ -24,6 +39,20 @@ export async function fetchServerInfo() {
     youtuber = category(4)
     builder = category(5)
     designer = category(6)
+  }
+
+  class Stats {
+    rushRETRO = formatData('rushretro')
+    rushMDT = formatData('rush')
+    hikaBrain = formatData('hikabrain')
+    skyWars = formatData('skywars')
+    octogone = formatData('mma')
+    shootCraft = formatData('shootcraft')
+    infected = formatData('infected')
+    survival = formatData('survival')
+    blitz = formatData('blitz')
+    PVPSmash = formatData('pvpsmash')
+    landRush = formatData('landrush')
   }
 
   class ConnectedPlayers {
@@ -52,5 +81,6 @@ export async function fetchServerInfo() {
       registeredPlayers: parseInt(doc.querySelectorAll('.gstat-item')[4].children[0].textContent.replace(/ /g, ''))
     }
     staff = new Staff()
+    stats = new Stats()
   })()
 }
