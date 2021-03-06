@@ -14,7 +14,6 @@ export async function fetchPlayer(username: string, period = 0) {
       funcraftURL: selector[i].children[0].getAttribute('href')!
     })
   }
-
   const data = JSON.parse(doc.querySelectorAll('script')[6]!.textContent.split('=')[2].slice(1, -12))
   const formatData = (game: string, gameNum: number) => {
     const obj: Record<string, number | string> = {}
