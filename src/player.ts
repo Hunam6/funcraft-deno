@@ -1,7 +1,6 @@
 import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts'
 import {parse} from 'https://deno.land/x/date_fns/index.js'
 import {fr} from 'https://deno.land/x/date_fns/locale/index.js'
-import {Game} from './game.ts'
 
 export async function fetchPlayer(username: string, period = 0) {
   const doc = new DOMParser().parseFromString(await fetch(`https://www.funcraft.net/fr/joueurs?q=${username}`).then(res => res.text()), 'text/html')!
