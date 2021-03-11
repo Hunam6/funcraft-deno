@@ -1,10 +1,7 @@
-# funcraft-deno
-
-## A Funcraft statistics scraper for Deno
+<h1 align='center'><ins>funcraft-deno</ins></h1>
+<p align='center'><strong>A Funcraft scraper for Deno</strong></p>
 
 ---
-
-### Usage
 
 #### Example
 
